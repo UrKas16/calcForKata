@@ -5,7 +5,6 @@ class ArabicRomanNumAndOperators {
     private final ArrayList<String> operators;
     private final ArrayList<String> romanNum;
     private final HashMap<String, String> arabicRomanNum;
-    private boolean isRoman;
 
     public ArabicRomanNumAndOperators(){
         arabicRomanNum = new HashMap<>();
@@ -21,6 +20,8 @@ class ArabicRomanNumAndOperators {
         arabicRomanNum.put("VIII", "8");
         arabicRomanNum.put("IX", "9");
         arabicRomanNum.put("X", "10");
+       // arabicRomanNum.put("L", "50");
+      //  arabicRomanNum.put("C", "100");
 
         operators = new ArrayList<>();
 
@@ -44,18 +45,6 @@ class ArabicRomanNumAndOperators {
     public ArrayList<String> getOperators(){
         return operators;
     }
-
-    public void setIsRoman(boolean value){
-        if (value == isRoman) {
-            return;
-        }
-        isRoman = value;
-    }
-
-    public boolean getIsRoman(){
-        return isRoman;
-    }
-
 
     public ArrayList<String> getRomanNum() {
         return romanNum;

@@ -23,6 +23,8 @@ public class Main {
 
         Calculator calc = new Calculator(a, b, c);
 
+        calc.Calculate();
+
 
         System.out.println();
 

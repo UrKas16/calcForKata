@@ -8,10 +8,15 @@ class Calculator {
     private int secondNumInt;
     private ArabicRomanNumAndOperators arabicRomanNumAndOperators;
 
+    private boolean isRoman;
+
+    private boolean isArabic;
+
 
     public Calculator(String firstNum, String secondNum, String operator) throws OperatorException, OperandException {
         arabicRomanNumAndOperators = new ArabicRomanNumAndOperators();
         setFirstNumStr(firstNum);
+        setSecondNumStr(secondNum);
         setOperator(operator);
 
 
@@ -21,9 +26,9 @@ class Calculator {
         return operator;
     }
 
-    public void setOperator(String operator) throws OperatorException{
-        if (operator.equals("")){
-           throw new OperatorException("Cтрока не является математической операцией.");
+    public void setOperator(String operator) throws OperatorException {
+        if (operator.equals("")) {
+            throw new OperatorException("Cтрока не является математической операцией.");
         }
         this.operator = operator;
     }
@@ -33,21 +38,24 @@ class Calculator {
     }
 
     public void setFirstNumStr(String firstNumStr) throws OperandException {
-        if ((arabicRomanNumAndOperators.getArabicRomanNum().containsKey(firstNumStr)) | (arabicRomanNumAndOperators.getArabicRomanNum().containsValue(firstNumStr))){
-           this.firstNumInt = ConvertToInt(firstNumStr);
-           if (this.firstNumInt > 10){
-               throw new OperandException("lkjl");
-           }
+        if ((arabicRomanNumAndOperators.getArabicRomanNum().containsKey(firstNumStr)) | (arabicRomanNumAndOperators.getArabicRomanNum().containsValue(firstNumStr))) {
+            this.firstNumInt = ConvertToInt(firstNumStr);
+        } else {
+            throw new OperandException("Число слишком большое. Введите новое.");
         }
-        this.firstNumStr = firstNumStr;
     }
 
     public String getSecondNumStr() {
         return secondNumStr;
     }
 
-    public void setSecondNumStr(String secondNumStr) {
-        this.secondNumStr = secondNumStr;
+    public void setSecondNumStr(String secondNumStr) throws OperandException {
+        if ((arabicRomanNumAndOperators.getArabicRomanNum().containsKey(secondNumStr)) | (arabicRomanNumAndOperators.getArabicRomanNum().containsValue(secondNumStr))) {
+            this.secondNumInt = ConvertToInt(secondNumStr);
+        } else {
+            throw new OperandException("Число слишком большое. Введите новое.");
+        }
+
     }
 
     public int getFirstNumInt() {
@@ -74,11 +82,27 @@ class Calculator {
         this.arabicRomanNumAndOperators = arabicRomanNumAndOperators;
     }
 
-    private int ConvertToInt(String s){
-        if (arabicRomanNumAndOperators.getArabicRomanNum().containsKey(s)){
-            return Integer.parseInt(arabicRomanNumAndOperators.getArabicRomanNum().getOrDefault(s, null));
+    private int ConvertToInt(String s) {
+        if (arabicRomanNumAndOperators.getArabicRomanNum().containsKey(s)) {
+            isRoman = true;
+            return Integer.parseInt(arabicRomanNumAndOperators.getArabicRomanNum().get(s));
         } else {
+            isArabic = true;
             return Integer.parseInt(s);
         }
+    }
+
+    public int Calculate() throws OperandException{
+        if (isArabic & isRoman) {
+            throw new OperandException("Операция не может быть выполнена между арабскими и рисмскими цифрами.");
+        }
+
+        switch (operator) {
+            case ("+"):
+                return 0;
+
+
+        }
+        return 0;
     }
 }
