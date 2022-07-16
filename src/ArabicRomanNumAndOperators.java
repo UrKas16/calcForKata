@@ -4,24 +4,41 @@ import java.util.HashMap;
 class ArabicRomanNumAndOperators {
     private final ArrayList<String> operators;
     private final ArrayList<String> romanNum;
-    private final HashMap<String, String> arabicRomanNum;
+    private final HashMap<String, String> romanToArabicNum;
 
-    public ArabicRomanNumAndOperators(){
-        arabicRomanNum = new HashMap<>();
+    private final HashMap<Integer, String> arabicToRomanNum;
 
-        arabicRomanNum.put("0", "0");
-        arabicRomanNum.put("I", "1");
-        arabicRomanNum.put("II", "2");
-        arabicRomanNum.put("III", "3");
-        arabicRomanNum.put("IV", "4");
-        arabicRomanNum.put("V", "5");
-        arabicRomanNum.put("VI", "6");
-        arabicRomanNum.put("VII", "7");
-        arabicRomanNum.put("VIII", "8");
-        arabicRomanNum.put("IX", "9");
-        arabicRomanNum.put("X", "10");
-       // arabicRomanNum.put("L", "50");
-      //  arabicRomanNum.put("C", "100");
+    public ArabicRomanNumAndOperators() {
+        romanToArabicNum = new HashMap<>();
+
+        romanToArabicNum.put("0", "0");
+        romanToArabicNum.put("I", "1");
+        romanToArabicNum.put("II", "2");
+        romanToArabicNum.put("III", "3");
+        romanToArabicNum.put("IV", "4");
+        romanToArabicNum.put("V", "5");
+        romanToArabicNum.put("VI", "6");
+        romanToArabicNum.put("VII", "7");
+        romanToArabicNum.put("VIII", "8");
+        romanToArabicNum.put("IX", "9");
+        romanToArabicNum.put("X", "10");
+
+        arabicToRomanNum = new HashMap<>();
+
+        arabicToRomanNum.put(1, "I");
+        arabicToRomanNum.put(2, "II");
+        arabicToRomanNum.put(3, "III");
+        arabicToRomanNum.put(4, "IV");
+        arabicToRomanNum.put(5, "V");
+        arabicToRomanNum.put(6, "VI");
+        arabicToRomanNum.put(7, "VII");
+        arabicToRomanNum.put(8, "VIII");
+        arabicToRomanNum.put(9, "IX");
+        arabicToRomanNum.put(10, "X");
+        arabicToRomanNum.put(40, "XL");
+        arabicToRomanNum.put(50, "L");
+        arabicToRomanNum.put(90, "XC");
+        arabicToRomanNum.put(100, "C");
 
         operators = new ArrayList<>();
 
@@ -38,12 +55,16 @@ class ArabicRomanNumAndOperators {
 
     }
 
-    public HashMap<String, String> getArabicRomanNum(){
-        return arabicRomanNum;
+    public HashMap<String, String> getrRomanToArabicNumm() {
+        return romanToArabicNum;
     }
 
-    public ArrayList<String> getOperators(){
+    public ArrayList<String> getOperators() {
         return operators;
+    }
+
+    public HashMap<Integer, String> getArabicToRomanNum(){
+        return arabicToRomanNum;
     }
 
     public ArrayList<String> getRomanNum() {

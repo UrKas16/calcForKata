@@ -4,31 +4,26 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws OperatorException, OperandException {
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
 
-        //   HashMap<Integer, String> arabicRomanNum = new HashMap<>(new ArabicRomanNum().getArabicRomanNum());
+            System.out.println();
+            System.out.print("Введите ваше уравнение, которое нужно решить: ");
 
-        Scanner scanner = new Scanner(System.in);
+            String equation = scanner.nextLine();
 
-        System.out.print("Введите ваше уравнение, которое нужно решить: ");
+            ParserEquation pe = new ParserEquation();
+            pe.ParseString(equation);
 
-        String equation = scanner.nextLine();
+            String firstNum = pe.getFirstNum();
+            String secondNum = pe.getSecondNum();
+            String operator = pe.getOperation();
 
-        ParserEquation pe = new ParserEquation();
-        pe.ParseString(equation);
+            Calculator calc = new Calculator(firstNum, secondNum, operator);
 
+            calc.Calculate();
+        }
 
-        String a = pe.getFirstNum();
-        String b = pe.getSecondNum();
-        String c = pe.getOperation();
-
-        Calculator calc = new Calculator(a, b, c);
-
-        calc.Calculate();
-
-
-        System.out.println();
-
-        scanner.next();
     }
 
 }

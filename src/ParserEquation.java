@@ -13,10 +13,6 @@ class ParserEquation {
         operation = "";
     }
 
-    //  public void setEquation(String equation) {
-    //      this.equation = equation.trim();
-    //   }
-
     public String getFirstNum() {
         return this.firstNum;
     }
