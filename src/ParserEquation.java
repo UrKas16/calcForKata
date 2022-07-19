@@ -3,10 +3,10 @@ class ParserEquation {
     private String firstNum;
     private String secondNum;
     private String operation;
-    private final ArabicRomanNumAndOperators arabicRomanNumAndOperators;
+    private final ConvertorArabicRomanNum convertorArabicRomanNum;
 
     public ParserEquation() {
-        this.arabicRomanNumAndOperators = new ArabicRomanNumAndOperators();
+        this.convertorArabicRomanNum = new ConvertorArabicRomanNum();
         firstNum = "";
         secondNum = "";
         operation = "";
@@ -16,45 +16,40 @@ class ParserEquation {
         return this.firstNum;
     }
 
-    public void setFirstNum(String firstNum) {
-        this.firstNum = firstNum;
-    }
-
     public String getSecondNum() {
         return this.secondNum;
-    }
-
-    public void setSecondNum(String secondNum) {
-        this.secondNum = secondNum;
     }
 
     public String getOperation() {
         return this.operation;
     }
 
-    public void setOperation(String operation) {
-        this.operation = operation;
+    private void setOperation(String value) throws OperatorException{
+        if (operation != "") {
+            throw  new OperatorException("Формат математической операции не удовлетворяет заданию.");
+        }
+        operation = value;
     }
 
-    public void ParseString(String s) {
-        String splitStr[] = s.split("");
+    public void ParseString(String s) throws OperatorException {
         for (int i = 0; i < s.length(); i++) {
             String operand = Character.toString(s.charAt(i));
-            if (operand.equals(" ")){
+            if (operand.equals(" ")) {
                 continue;
             }
-
-            if (arabicRomanNumAndOperators.getOperators().contains(operand)) {
+            if (convertorArabicRomanNum.getOperators().contains(operand)) {
                 setOperation(operand);
                 continue;
             }
-
             if (operation.equals("")) {
                 firstNum += operand;
             } else {
                 secondNum += operand;
-
             }
+        }
+
+        if (operation.equals("")) {
+            throw new OperatorException("Строка не является арифметическим выражением.");
         }
 
     }

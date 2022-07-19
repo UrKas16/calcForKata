@@ -12,7 +12,7 @@ public class Main {
 
             String equation = scanner.nextLine();
 
-            System.out.println(calc(equation));
+            System.out.printf("Ваш результат: %s", calc(equation));
 
         }
 
@@ -22,14 +22,24 @@ public class Main {
         ParserEquation pe = new ParserEquation();
         pe.ParseString(input);
 
-        String firstNum = pe.getFirstNum();
-        String secondNum = pe.getSecondNum();
+        ConvertorArabicRomanNum convertor = new ConvertorArabicRomanNum(pe.getFirstNum(), pe.getSecondNum());
+
+        boolean isRoman = convertor.isRoman();
+        boolean isArabic = convertor.isArabic();
+        int firstNum = convertor.getFirstNum();
+        int secondNum = convertor.getSecondNum();
+
         String operator = pe.getOperation();
 
-        Calculator calculator = new Calculator(firstNum, secondNum, operator);
+        Calculator calculator = new Calculator(convertor.isArabic(), convertor.isRoman());
 
-        return calculator.Calculate();
+        int result = calculator.Calculate(firstNum, secondNum, operator);
+
+        if (isRoman){
+           return convertor.ConvertArabicToRoman(result);
+        } else{
+            return Integer.toString(result);
+        }
     }
-
 
 }

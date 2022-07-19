@@ -2,13 +2,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-class ArabicRomanNumAndOperators {
+class ConvertorArabicRomanNum {
+
+    private int firstNum;
+    private int secondNum;
+
+    private boolean isRoman;
+    private boolean isArabic;
     private final ArrayList<String> operators;
     private final ArrayList<String> romanNum;
     private final HashMap<String, String> romanToArabicNum;
     private final HashMap<Integer, String> arabicToRomanNum;
 
-    public ArabicRomanNumAndOperators() {
+    public ConvertorArabicRomanNum() {
         romanToArabicNum = new HashMap<>();
 
         romanToArabicNum.put("0", "0");
@@ -55,7 +61,14 @@ class ArabicRomanNumAndOperators {
 
     }
 
-    public HashMap<String, String> getrRomanToArabicNumm() {
+    public ConvertorArabicRomanNum(String firstNum, String secondNum) throws OperandException {
+        this();
+        setFirstNum(firstNum);
+        setSecondNum(secondNum);
+    }
+
+
+    public HashMap<String, String> getRomanToArabicNum() {
         return romanToArabicNum;
     }
 
@@ -63,12 +76,48 @@ class ArabicRomanNumAndOperators {
         return operators;
     }
 
-    public HashMap<Integer, String> getArabicToRomanNum(){
+    public HashMap<Integer, String> getArabicToRomanNum() {
         return arabicToRomanNum;
     }
 
     public ArrayList<String> getRomanNum() {
         return romanNum;
+    }
+
+    public int getFirstNum() {
+        return firstNum;
+    }
+
+    public void setFirstNum(String firstNum) throws OperandException {
+        if ((firstNum == "") | (firstNum == " ")) {
+            throw new OperandException("Cтрока не является математической операцией.");
+        } else if ((getRomanToArabicNum().containsKey(firstNum)) | (getRomanToArabicNum().containsValue(firstNum))) {
+            this.firstNum = ConvertToInt(firstNum);
+        } else {
+            throw new OperandException("Число слишком большое. Введите новое.");
+        }
+    }
+
+    public int getSecondNum() {
+        return secondNum;
+    }
+
+    public void setSecondNum(String secondNum) throws OperandException {
+        if ((secondNum == "") | (secondNum == " ")) {
+            throw new OperandException("Cтрока не является математической операцией.");
+        }  else if ((getRomanToArabicNum().containsKey(secondNum)) | (getRomanToArabicNum().containsValue(secondNum))) {
+            this.secondNum = ConvertToInt(secondNum);
+        } else {
+            throw new OperandException("Число слишком большое. Введите новое.");
+        }
+    }
+
+    public boolean isRoman() {
+        return isRoman;
+    }
+
+    public boolean isArabic() {
+        return isArabic;
     }
 
     public String ConvertArabicToRoman(int Num) {
@@ -90,6 +139,16 @@ class ArabicRomanNumAndOperators {
             }
         }
         return romanNum;
+    }
+
+    private int ConvertToInt(String num) {
+        if (getRomanToArabicNum().containsKey(num)) {
+            isRoman = true;
+            return Integer.parseInt(getRomanToArabicNum().get(num));
+        } else {
+            isArabic = true;
+            return Integer.parseInt(num);
+        }
     }
 
 }
