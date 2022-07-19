@@ -12,18 +12,24 @@ public class Main {
 
             String equation = scanner.nextLine();
 
-            ParserEquation pe = new ParserEquation();
-            pe.ParseString(equation);
+            System.out.println(calc(equation));
 
-            String firstNum = pe.getFirstNum();
-            String secondNum = pe.getSecondNum();
-            String operator = pe.getOperation();
-
-            Calculator calc = new Calculator(firstNum, secondNum, operator);
-
-            calc.Calculate();
         }
 
     }
+
+    public static String calc(String input) throws OperandException, OperatorException {
+        ParserEquation pe = new ParserEquation();
+        pe.ParseString(input);
+
+        String firstNum = pe.getFirstNum();
+        String secondNum = pe.getSecondNum();
+        String operator = pe.getOperation();
+
+        Calculator calculator = new Calculator(firstNum, secondNum, operator);
+
+        return calculator.Calculate();
+    }
+
 
 }

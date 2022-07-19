@@ -5,7 +5,6 @@ class ParserEquation {
     private String operation;
     private final ArabicRomanNumAndOperators arabicRomanNumAndOperators;
 
-
     public ParserEquation() {
         this.arabicRomanNumAndOperators = new ArabicRomanNumAndOperators();
         firstNum = "";
@@ -38,6 +37,7 @@ class ParserEquation {
     }
 
     public void ParseString(String s) {
+        String splitStr[] = s.split("");
         for (int i = 0; i < s.length(); i++) {
             String operand = Character.toString(s.charAt(i));
             if (operand.equals(" ")){
@@ -58,7 +58,5 @@ class ParserEquation {
         }
 
     }
-
-
 }
 

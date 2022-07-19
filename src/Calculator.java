@@ -100,13 +100,13 @@ class Calculator {
         }
     }
 
-    public void Calculate() throws OperandException {
+    public String Calculate() throws OperandException {
         if (isArabic & isRoman) {
             throw new OperandException("Операция не может быть выполнена между арабскими и рисмскими цифрами.");
         } else if (isArabic & !isRoman) {
-            System.out.printf("Результат операции: %d", CalculateArabic());
+            return String.format("Результат операции: %d", CalculateArabic());
         } else {
-            System.out.printf("Результат операции: %s", CalculateRoman());
+            return String.format("Результат операции: %s", CalculateRoman());
         }
 
     }
@@ -123,6 +123,7 @@ class Calculator {
                 return firstNumInt / secondNumInt;
         }
         return 0;
+
     }
 
     private String CalculateRoman() throws OperandException {
@@ -132,8 +133,8 @@ class Calculator {
                 result = firstNumInt + secondNumInt;
                 return ConvertArabicToRoman(result);
             case "-":
-                if (firstNumInt > secondNumInt) {
-                    throw new OperandException("Операция не возможна. В римской системе нет отрицательных чисел");
+                if ((firstNumInt < secondNumInt) | (firstNumInt == secondNumInt)) {
+                    throw new OperandException("Операция не возможна. В римской системе нет отрицательных чисел и НУЛЯ");
                 }
                 result = firstNumInt - secondNumInt;
                 return ConvertArabicToRoman(result);

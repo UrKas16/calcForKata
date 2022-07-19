@@ -1,11 +1,11 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 class ArabicRomanNumAndOperators {
     private final ArrayList<String> operators;
     private final ArrayList<String> romanNum;
     private final HashMap<String, String> romanToArabicNum;
-
     private final HashMap<Integer, String> arabicToRomanNum;
 
     public ArabicRomanNumAndOperators() {
@@ -70,4 +70,26 @@ class ArabicRomanNumAndOperators {
     public ArrayList<String> getRomanNum() {
         return romanNum;
     }
+
+    public String ConvertArabicToRoman(int Num) {
+        String romanNum = "";
+        int newNum = Num;
+
+        Object[] key = getArabicToRomanNum().keySet().toArray();
+
+        Arrays.sort(key);
+
+        while (newNum > 0) {
+            for (int i = (key.length - 1); i >= 0; i--) {
+                int specKey = (int) key[i];
+                if (newNum % specKey < newNum) {
+                    romanNum += getArabicToRomanNum().get(specKey);
+                    newNum -= specKey;
+                    break;
+                }
+            }
+        }
+        return romanNum;
+    }
+
 }
