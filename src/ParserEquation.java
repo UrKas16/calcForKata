@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 class ParserEquation {
     // private String equation;
     private String firstNum;
@@ -25,13 +27,13 @@ class ParserEquation {
     }
 
     private void setOperation(String value) throws OperatorException{
-        if (operation != "") {
+        if (!operation.equals("")) {
             throw  new OperatorException("Формат математической операции не удовлетворяет заданию.");
         }
         operation = value;
     }
 
-    public void ParseString(String s) throws OperatorException {
+    public void ParseString(@NotNull String s) throws OperatorException {
         for (int i = 0; i < s.length(); i++) {
             String operand = Character.toString(s.charAt(i));
             if (operand.equals(" ")) {

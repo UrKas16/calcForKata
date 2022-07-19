@@ -1,5 +1,3 @@
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
@@ -31,7 +29,7 @@ public class Main {
 
         String operator = pe.getOperation();
 
-        Calculator calculator = new Calculator(convertor.isArabic(), convertor.isRoman());
+        Calculator calculator = new Calculator(isArabic, isRoman);
 
         int result = calculator.Calculate(firstNum, secondNum, operator);
 

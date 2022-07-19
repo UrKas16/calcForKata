@@ -1,28 +1,13 @@
-import java.util.Arrays;
-
+import org.jetbrains.annotations.NotNull;
 class Calculator {
-    private ConvertorArabicRomanNum convertorArabicRomanNum;
-
-    private boolean isRoman;
-
-    private boolean isArabic;
+    private final boolean isRoman;
+    private final boolean isArabic;
 
 
-    public Calculator(boolean isArabic, boolean isRoman) throws OperatorException, OperandException {
-        convertorArabicRomanNum = new ConvertorArabicRomanNum();
+    public Calculator(boolean isArabic, boolean isRoman) {
         this.isArabic = isArabic;
         this.isRoman = isRoman;
     }
-
-
-    public ConvertorArabicRomanNum getArabicRomanNumAndOperators() {
-        return convertorArabicRomanNum;
-    }
-
-    public void setArabicRomanNumAndOperators(ConvertorArabicRomanNum convertorArabicRomanNum) {
-        this.convertorArabicRomanNum = convertorArabicRomanNum;
-    }
-
 
     public int Calculate(int firstNum, int secondNum, String operator) throws OperandException {
         if (isArabic & isRoman) {
@@ -35,23 +20,17 @@ class Calculator {
 
     }
 
-    private int CalculateArabic(int firstNum, int secondNum, String operator) throws OperandException {
-        switch (operator) {
-            case "+":
-                return firstNum + secondNum;
-            case "-":
-                return firstNum - secondNum;
-            case "*":
-                return firstNum * secondNum;
-            case "/":
-                return firstNum / secondNum;
-            default:
-                throw new OperandException("Такого оператора не существует.");
-        }
+    private int CalculateArabic(int firstNum, int secondNum, @NotNull String operator) throws OperandException {
+        return switch (operator) {
+            case "+" -> firstNum + secondNum;
+            case "-" -> firstNum - secondNum;
+            case "*" -> firstNum * secondNum;
+            case "/" -> firstNum / secondNum;
+            default -> throw new OperandException("Такого оператора не существует.");
+        };
     }
 
-    private int CalculateRoman(int firstNum, int secondNum, String operator) throws OperandException {
-        int result;
+    private int CalculateRoman(int firstNum, int secondNum, @NotNull String operator) throws OperandException {
         switch (operator) {
             case "+":
                 return firstNum + secondNum;

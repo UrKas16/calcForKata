@@ -6,11 +6,9 @@ class ConvertorArabicRomanNum {
 
     private int firstNum;
     private int secondNum;
-
     private boolean isRoman;
     private boolean isArabic;
     private final ArrayList<String> operators;
-    private final ArrayList<String> romanNum;
     private final HashMap<String, String> romanToArabicNum;
     private final HashMap<Integer, String> arabicToRomanNum;
 
@@ -52,13 +50,6 @@ class ConvertorArabicRomanNum {
         operators.add("-");
         operators.add("*");
         operators.add("/");
-
-        romanNum = new ArrayList<>();
-
-        romanNum.add("I");
-        romanNum.add("V");
-        romanNum.add("X");
-
     }
 
     public ConvertorArabicRomanNum(String firstNum, String secondNum) throws OperandException {
@@ -80,16 +71,12 @@ class ConvertorArabicRomanNum {
         return arabicToRomanNum;
     }
 
-    public ArrayList<String> getRomanNum() {
-        return romanNum;
-    }
-
     public int getFirstNum() {
         return firstNum;
     }
 
     public void setFirstNum(String firstNum) throws OperandException {
-        if ((firstNum == "") | (firstNum == " ")) {
+        if ((firstNum.equals("")) | (firstNum.equals(" "))) {
             throw new OperandException("Cтрока не является математической операцией.");
         } else if ((getRomanToArabicNum().containsKey(firstNum)) | (getRomanToArabicNum().containsValue(firstNum))) {
             this.firstNum = ConvertToInt(firstNum);
@@ -103,9 +90,9 @@ class ConvertorArabicRomanNum {
     }
 
     public void setSecondNum(String secondNum) throws OperandException {
-        if ((secondNum == "") | (secondNum == " ")) {
+        if ((secondNum.equals("")) | (secondNum.equals(" "))) {
             throw new OperandException("Cтрока не является математической операцией.");
-        }  else if ((getRomanToArabicNum().containsKey(secondNum)) | (getRomanToArabicNum().containsValue(secondNum))) {
+        } else if ((getRomanToArabicNum().containsKey(secondNum)) | (getRomanToArabicNum().containsValue(secondNum))) {
             this.secondNum = ConvertToInt(secondNum);
         } else {
             throw new OperandException("Число слишком большое. Введите новое.");
