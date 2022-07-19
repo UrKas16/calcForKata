@@ -5,12 +5,18 @@ public class Main {
         while (true) {
             Scanner scanner = new Scanner(System.in);
 
+            System.out.println("Для выхода введите: \"q\"");
             System.out.println();
             System.out.print("Введите ваше уравнение, которое нужно решить: ");
 
             String equation = scanner.nextLine();
 
+            if ("q".equals(equation)){
+                System.out.print("Пользователь вышел из программы.");
+                System.exit(0);
+            }
             System.out.printf("Ваш результат: %s", calc(equation));
+            System.out.println();
 
         }
 
